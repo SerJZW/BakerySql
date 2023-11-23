@@ -1,0 +1,198 @@
+﻿<Window x:Class="BakerySql.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BakerySql"
+        mc:Ignorable="d"
+        Title="Bakery" MinWidth="1280" MinHeight="600" Background="PapayaWhip">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Viewbox Grid.Row="0" Margin="10,0,0,0" HorizontalAlignment="Left">
+            <DockPanel Grid.Row="0">
+                <Border BorderThickness="2" BorderBrush="Black" CornerRadius="15" Margin="10,10,10,0" Height="50" Width="1200">
+                    <DockPanel Grid.Row="0">
+                        <TextBlock Text="Bakery" FontSize="25pt" HorizontalAlignment="Left" FontFamily="Times New Roman" FontStyle="Italic"/>
+                        <Button Content="Exit"
+                                Width="30"
+                                Height="30"
+                                Margin="0,0,10,0"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding ExitCommand}">
+                        </Button>
+                    </DockPanel>
+                </Border>
+            </DockPanel>
+        </Viewbox>
+
+        <TabControl Grid.Row="1" Margin="20,0,20,20" Style="{StaticResource TabControlStyle}">
+            <TabItem Style="{StaticResource TabStyle}" Header="Сотрудники">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid  Style="{StaticResource DataGridStyle}" Name="employeeDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding EMPLOYEE}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Employee_ID}"/>
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Post_ID}"/>
+                                <DataGridTextColumn Header="Смена" Binding="{Binding Working_shift_ID}"/>
+                                <DataGridTextColumn Header="ФИО" Binding="{Binding Name_Employee}"/>
+                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Date_Of_Birth, StringFormat=d}"/>
+                                <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}"/>
+                                <DataGridTextColumn Header="Снилс" Binding="{Binding SNILS}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddEmployeeCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteEmployeeCommand}"  CommandParameter="{Binding SelectedItem, ElementName=employeeDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Должонсть">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="postDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding POST}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Post_ID}"/>
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Post_Name}"/>
+                                <DataGridTextColumn Header="Зарплата" Binding="{Binding Salary, StringFormat=',00'}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddPostCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeletePostCommand}"  CommandParameter="{Binding SelectedItem, ElementName=postDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Смена">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="workDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding WORKING_SHIFT}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Working_shift_ID}"/>
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Work_shedule}"/>
+                                <DataGridTextColumn Header="График работы" Binding="{Binding Work_time}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddWorkCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteWorkCommand}"  CommandParameter="{Binding SelectedItem, ElementName=workDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Склад">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="storeDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding STORE}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding ID_Ingridient}"/>
+                                <DataGridTextColumn Header="ЕД" Binding="{Binding ID_Unit}"/>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Ingridient_Name}"/>
+                                <DataGridTextColumn Header="Кол-во" Binding="{Binding Ingridient_Count}"/>
+                                <DataGridTextColumn Header="Цена за ед." Binding="{Binding Cost_per_one, StringFormat=',00'}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddStoreCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteStoreCommand}"  CommandParameter="{Binding SelectedItem, ElementName=storeDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="ЕИ">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="unitsDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding UNITS}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Unit_ID}"/>
+                                <DataGridTextColumn Header="ЕД" Binding="{Binding Unit_Name}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddUnitsCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteUnitsCommand}"  CommandParameter="{Binding SelectedItem, ElementName=unitsDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Оборудование">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="equipDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding EQUIPMENT}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Equipment_Id}"/>
+                                <DataGridTextColumn Header="Оборудование" Binding="{Binding Equipment_Name}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddEquipmentCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteEquipmentCommand}"  CommandParameter="{Binding SelectedItem, ElementName=equipDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Рецепт">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="recipeDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding RECIPE}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Recipe_ID }"/>
+                                <DataGridTextColumn Header="Оборуднование" Binding="{Binding Equipment_ID }"/>
+                                <DataGridTextColumn Header="Рецепт" Binding="{Binding Recipe_Name}"/>
+                                <DataGridTextColumn Header="Время готовки" Binding="{Binding CookingTime}"/>
+                                <DataGridTextColumn Header="Калории" Binding="{Binding Calories}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddRecipeCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteRecipeCommand}"  CommandParameter="{Binding SelectedItem, ElementName=recipeDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Приготовление">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="cookingDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding COOKING_PRODUCT}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Cooking_ID}"/>
+                                <DataGridTextColumn Header="Оборуднование" Binding="{Binding Recipe_ID}"/>
+                                <DataGridTextColumn Header="Рецепт" Binding="{Binding Employee_ID}"/>
+                                <DataGridTextColumn Header="Время готовки" Binding="{Binding DateCooking, StringFormat=d}"/>
+                                <DataGridTextColumn Header="Калории" Binding="{Binding CountProduct}"/>
+                                <DataGridTextColumn Header="Калории" Binding="{Binding Price, StringFormat=',00'}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddCookingCommand}" HorizontalAlignment="Center" Width="100" Height="30" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteCookingCommand}"  CommandParameter="{Binding SelectedItem, ElementName=cookingDataGrid}" HorizontalAlignment="Center" Width="100" Height="30" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}" Header="Полка">
+                <StackPanel>
+                    <ScrollViewer Style="{StaticResource ScrollStyle}">
+                        <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="shelfDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding SHELF}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding SHELF_ID}"/>
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Cooking_ID}"/>
+                                <DataGridTextColumn Header="График работы" Binding="{Binding Sells}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Content="Добавить" Command="{Binding AddShelfCommand}" HorizontalAlignment="Center" Width="150" Height="40" Style="{StaticResource ButtonStyle}"/>
+                    <Button VerticalAlignment="Center" Content="Удалить" Command="{Binding DeleteShelfCommand}"  CommandParameter="{Binding SelectedItem, ElementName=shelfDataGrid}" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,10,0,0" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Style="{StaticResource TabStyle}">
+                <TabItem.Header>
+                    <TextBlock Text="Ингридиенты для приготовления" FontSize="10" TextWrapping="Wrap"/>
+                </TabItem.Header>
+                <ScrollViewer Style="{StaticResource ScrollStyle}">
+                    <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" AutoGenerateColumns="False" ItemsSource="{Binding INGRIDIENTSINRESIPE}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ID_Recipe}"/>
+                            <DataGridTextColumn Header="Оборудование" Binding="{Binding ID_Ingridients}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <DockPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button VerticalAlignment="Center" Content="Сохранить" Command="{Binding SaveChangesCommand}" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,20" Style="{StaticResource ButtonStyle}"/>
+        </DockPanel>
+
+    </Grid>
+</Window>
