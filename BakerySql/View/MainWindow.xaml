@@ -149,11 +149,11 @@
                         <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="cookingDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding COOKING_PRODUCT}" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Binding="{Binding Cooking_ID}"/>
-                                <DataGridTextColumn Header="Оборуднование" Binding="{Binding Recipe_ID}"/>
-                                <DataGridTextColumn Header="Рецепт" Binding="{Binding Employee_ID}"/>
+                                <DataGridTextColumn Header="Рецепт" Binding="{Binding Recipe_ID}"/>
+                                <DataGridTextColumn Header="Сотрудник" Binding="{Binding Employee_ID}"/>
                                 <DataGridTextColumn Header="Время готовки" Binding="{Binding DateCooking, StringFormat=d}"/>
-                                <DataGridTextColumn Header="Калории" Binding="{Binding CountProduct}"/>
-                                <DataGridTextColumn Header="Калории" Binding="{Binding Price, StringFormat=',00'}"/>
+                                <DataGridTextColumn Header="Кол-во" Binding="{Binding CountProduct}"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=',00'}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
@@ -167,8 +167,8 @@
                         <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" Name="shelfDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding SHELF}" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Binding="{Binding SHELF_ID}"/>
-                                <DataGridTextColumn Header="Должность" Binding="{Binding Cooking_ID}"/>
-                                <DataGridTextColumn Header="График работы" Binding="{Binding Sells}"/>
+                                <DataGridTextColumn Header="Продукция" Binding="{Binding Cooking_ID}"/>
+                                <DataGridTextColumn Header="Продажи" Binding="{Binding Sells}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
@@ -183,8 +183,8 @@
                 <ScrollViewer Style="{StaticResource ScrollStyle}">
                     <DataGrid Background="GhostWhite" Style="{StaticResource DataGridStyle}" AutoGenerateColumns="False" ItemsSource="{Binding INGRIDIENTSINRESIPE}" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding ID_Recipe}"/>
-                            <DataGridTextColumn Header="Оборудование" Binding="{Binding ID_Ingridients}"/>
+                            <DataGridTextColumn Header="ID Рецепт" Binding="{Binding ID_Recipe}"/>
+                            <DataGridTextColumn Header="ID Ингридиента" Binding="{Binding ID_Ingridients}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
@@ -193,6 +193,5 @@
         <DockPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button VerticalAlignment="Center" Content="Сохранить" Command="{Binding SaveChangesCommand}" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,20" Style="{StaticResource ButtonStyle}"/>
         </DockPanel>
-
     </Grid>
 </Window>

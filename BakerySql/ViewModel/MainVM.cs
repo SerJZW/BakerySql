@@ -1,6 +1,7 @@
 ﻿using BakerySql.DataContext;
 using BakerySql.Models;
 using BakerySql.Models.Event;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.ObjectModel;
@@ -12,6 +13,7 @@ namespace BakerySql.ViewModel
     public class MainVM : Notify
     {
         BakeryDbContext db = new BakeryDbContext();
+
         public ObservableCollection<Employee> EMPLOYEE { get; set; }
         public ObservableCollection<Post> POST { get; set; }
         public ObservableCollection<WORKING_SHIFT> WORKING_SHIFT { get; set; }
@@ -399,6 +401,7 @@ namespace BakerySql.ViewModel
                 return new RelayCommand(obj =>
                 {
                     System.Windows.Application.Current.Shutdown();
+              
                 });
             }
         }
